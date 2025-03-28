@@ -1,2 +1,2 @@
 # Photos
-# Bryan Pintado Lawrence Sanchez 
+###### Bryan Pintado and Lawrence Sanchez
