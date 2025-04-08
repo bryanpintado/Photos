@@ -17,7 +17,7 @@ public class LoginController {
     public void handleLogin(ActionEvent event) {
         String username = usernameField.getText().trim();
         if (username.isEmpty()) {
-            System.out.println("Please enter a username.");
+            showAlert("Error: empty username");
 
             return;
         }
@@ -41,14 +41,16 @@ public class LoginController {
     // helper method to switch scenes
     private void switchScene(String fxmlFile) {
         // Load the login screen FXML file from the view folder
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/photos22/view/" + fxmlFile));
-            Stage stage = (Stage) usernameField.getScene().getWindow();
-            stage.setTitle("Photo Application Login");
-            stage.setScene(new Scene(root, 400, 300));
-            stage.show();
-        } catch (Exception e) {
-            showAlert("Failed to load " + fxmlFile + "\n" + "Reason: " + e.toString());
+        if (fxmlFile.equals("admin.fxml")) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/photos22/view/" + fxmlFile));
+                Stage stage = (Stage) usernameField.getScene().getWindow();
+                stage.setTitle("Admin Photo Application");
+                stage.setScene(new Scene(root, 400, 300));
+                stage.show();
+            } catch (Exception e) {
+                showAlert("Failed to load " + fxmlFile + "\n" + "Reason: " + e.toString());
+            }
         }
     }
 }
