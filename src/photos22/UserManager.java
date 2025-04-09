@@ -11,8 +11,15 @@ public class UserManager {
     }
 
     public void deleteUser(String username) {
-        if (isUserInList(username) == false) {
+        if (!isUserInList(username)) {
             AlertUtil.showAlert("Error: username (" + username + ") is not in the list");
+            return;
+        }
+        for(User user : users){
+            if(user.getUsername().equals(username)){
+                users.remove(user);
+                break;
+            }
         }
     }
 

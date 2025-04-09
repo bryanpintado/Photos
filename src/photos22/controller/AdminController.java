@@ -2,23 +2,18 @@ package photos22.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextInputDialog;
-import java.util.Optional;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import photos22.User; // Import the User class
 import photos22.UserManager;
 import photos22.AlertUtil;
+
 public class AdminController {
 
     UserManager manager = new UserManager();
 
     @FXML
     private ListView<User> userListView;
-    
 
     @FXML
     private void initialize() {
@@ -45,7 +40,12 @@ public class AdminController {
 
     @FXML
     private void handleDeleteUser(ActionEvent event) {
-        return;
+        User selectedUser = userListView.getSelectionModel().getSelectedItem();
+        if (selectedUser == null) {
+            AlertUtil.showAlert("Error: no user selected");
+        }
+        manager.deleteUser(selectedUser.getUsername());
+
     }
 
     @FXML
