@@ -1,21 +1,28 @@
 package photos22;
 
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class UserManager {
-    ArrayList<User> users;
+    public ObservableList<User> users;
 
     public UserManager() {
-        users = new ArrayList<>();
+        users = FXCollections.observableArrayList();
     }
 
     public void deleteUser(String username) {
+        if (isUserInList(username) == false) {
+            AlertUtil.showAlert("Error: username (" + username + ") is not in the list");
+        }
+    }
+
+    public boolean isUserInList(String username) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).getUsername().equals(username)) {
-                users.remove(i);
-                break;
+                return true;
             }
         }
+        return false;
     }
 
 }

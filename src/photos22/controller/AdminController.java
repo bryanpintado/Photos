@@ -14,13 +14,15 @@ import photos22.UserManager;
 import photos22.AlertUtil;
 public class AdminController {
 
+    UserManager manager = new UserManager();
+
     @FXML
     private ListView<User> userListView;
-    private ObservableList<User> users = FXCollections.observableArrayList();
+    
 
     @FXML
     private void initialize() {
-        userListView.setItems(users);
+        userListView.setItems(manager.users);
     }
 
     @FXML
@@ -33,12 +35,12 @@ public class AdminController {
             return;
         }
 
-        if (isUserInList(username)) {
+        if (manager.isUserInList(username)) {
             AlertUtil.showAlert("Error: username (" + username + ") already in list");
             return;
         }
         User newUser = new User(username.trim());
-        users.add(newUser);
+        manager.users.add(newUser);
     }
 
     @FXML
