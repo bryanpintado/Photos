@@ -32,6 +32,11 @@ public class AdminController {
             showAlert("Error: Username cannot be empty");
             return;
         }
+
+        if (isUserInList(username)) {
+            showAlert("Error: username ("+ username + ") already in list");
+            return;
+        }
         User newUser = new User(username.trim());
         users.add(newUser);
     }
@@ -44,6 +49,15 @@ public class AdminController {
     @FXML
     private void handleLogout(ActionEvent event) {
         return;
+    }
+
+    private boolean isUserInList(String username) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void showAlert(String message) {
