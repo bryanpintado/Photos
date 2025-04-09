@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import photos22.User; // Import the User class
 import photos22.UserManager;
-
+import photos22.AlertUtil;
 public class AdminController {
 
     @FXML
@@ -29,12 +29,12 @@ public class AdminController {
         dialog.setHeaderText("Enter new username");
         String username = dialog.showAndWait().orElse(null);
         if (username == null || username.trim().isEmpty()) {
-            showAlert("Error: Username cannot be empty");
+            AlertUtil.showAlert("Error: Username cannot be empty");
             return;
         }
 
         if (isUserInList(username)) {
-            showAlert("Error: username ("+ username + ") already in list");
+            AlertUtil.showAlert("Error: username (" + username + ") already in list");
             return;
         }
         User newUser = new User(username.trim());
@@ -49,22 +49,5 @@ public class AdminController {
     @FXML
     private void handleLogout(ActionEvent event) {
         return;
-    }
-
-    private boolean isUserInList(String username) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).getUsername().equals(username)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private void showAlert(String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

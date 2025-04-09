@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import photos22.AlertUtil;
 
 public class LoginController {
 
@@ -17,7 +18,7 @@ public class LoginController {
     public void handleLogin(ActionEvent event) {
         String username = usernameField.getText().trim();
         if (username.isEmpty()) {
-            showAlert("Error: empty username");
+            AlertUtil.showAlert("Error: empty username");
 
             return;
         }
@@ -28,14 +29,6 @@ public class LoginController {
         // Test print
         System.out.println("Logged in as: " + username);
 
-    }
-
-    private void showAlert(String message) {
-        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     // helper method to switch scenes
@@ -49,7 +42,8 @@ public class LoginController {
                 stage.setScene(new Scene(root, 400, 300));
                 stage.show();
             } catch (Exception e) {
-                showAlert("Failed to load " + fxmlFile + "\n" + "Reason: " + e.toString());
+                AlertUtil.showAlert("Failed to load " + fxmlFile + "\n" + "Reason: " + e.toString());
+                e.printStackTrace();
             }
         }
     }
