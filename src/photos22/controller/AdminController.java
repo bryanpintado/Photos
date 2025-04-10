@@ -52,11 +52,6 @@ public class AdminController {
         } catch (IOException e) {
             AlertUtil.showAlert("Error saving users: " + e.toString());
         }
-        // try {
-        // manager.loadUsers();
-        // } catch (Exception e) {
-        // AlertUtil.showAlert("Error: " + e.toString());
-        // }
     }
 
     @FXML

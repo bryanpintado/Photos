@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="photos22.controller.UserController"
+      spacing="10" alignment="CENTER" prefWidth="400" prefHeight="300">
+
+    <Label fx:id="welcomeLabel" text="Welcome!" style="-fx-font-size: 16px;" />
+
+    <ListView fx:id="albumListView" prefWidth="300" prefHeight="200" />
+
+    <HBox spacing="10">
+        <Button text="Create Album" onAction="#handleCreateAlbum"/>
+        <Button text="Delete Album" onAction="#handleDeleteAlbum"/>
+        <Button text="Open Album" onAction="#handleOpenAlbum"/>
+        <Button text="Logout" onAction="#handleLogout"/>
+    </HBox>
+</VBox>
