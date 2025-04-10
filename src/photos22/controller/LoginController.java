@@ -2,13 +2,9 @@ package photos22.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import photos22.AlertUtil;
-
+import photos22.*;
 public class LoginController {
 
     @FXML
@@ -22,29 +18,11 @@ public class LoginController {
 
             return;
         }
-        if (username.equals("admin") || username.equals("Admin")) {
-            switchScene("admin.fxml");
-        }
+       SceneUtil.switchScene((Stage) usernameField.getScene().getWindow(), "admin.fxml", "Admin Photo Application");
 
         // Test print
         System.out.println("Logged in as: " + username);
 
     }
 
-    // helper method to switch scenes
-    private void switchScene(String fxmlFile) {
-        // Load the login screen FXML file from the view folder
-        if (fxmlFile.equals("admin.fxml")) {
-            try {
-                Parent root = FXMLLoader.load(getClass().getResource("/photos22/view/" + fxmlFile));
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.setTitle("Admin Photo Application");
-                stage.setScene(new Scene(root, 400, 300));
-                stage.show();
-            } catch (Exception e) {
-                AlertUtil.showAlert("Failed to load " + fxmlFile + "\n" + "Reason: " + e.toString());
-                e.printStackTrace();
-            }
-        }
-    }
 }
