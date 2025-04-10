@@ -4,13 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
 import javafx.event.ActionEvent;
-import photos22.User; // Import the User class
-import photos22.UserManager;
+import javafx.stage.Stage;
+import photos22.UserManager; // Import the User class
+import photos22.User;
 import photos22.AlertUtil;
+import photos22.SceneUtil;
 
 public class AdminController {
 
-    UserManager manager = new UserManager();
+    UserManager manager = UserManager.getInstance();
 
     @FXML
     private ListView<User> userListView;
@@ -50,6 +52,6 @@ public class AdminController {
 
     @FXML
     private void handleLogout(ActionEvent event) {
-        return;
+        SceneUtil.switchScene((Stage) userListView.getScene().getWindow(), "login.fxml", "Login Page");
     }
 }

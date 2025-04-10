@@ -4,10 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class UserManager {
+    private static UserManager instance;
     public ObservableList<User> users;
 
-    public UserManager() {
+    private UserManager() {
         users = FXCollections.observableArrayList();
+    }
+
+    public static UserManager getInstance(){
+        if(instance == null){
+            instance = new UserManager();
+        }
+        return instance;
     }
 
     public void deleteUser(String username) {
