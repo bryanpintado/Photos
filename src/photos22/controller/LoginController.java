@@ -4,7 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import photos22.*;
+import photos22.SceneUtil;
+import photos22.AlertUtil;
+
 public class LoginController {
 
     @FXML
@@ -18,7 +20,12 @@ public class LoginController {
 
             return;
         }
-       SceneUtil.switchScene((Stage) usernameField.getScene().getWindow(), "admin.fxml", "Admin Photo Application");
+        if (username.equals("admin")) {
+            SceneUtil.switchScene((Stage) usernameField.getScene().getWindow(), "admin.fxml",
+                    "Admin Photo Application");
+        } else
+            SceneUtil.switchScene((Stage) usernameField.getScene().getWindow(), "admin.fxml",
+                    "Photo Application");
 
         // Test print
         System.out.println("Logged in as: " + username);
