@@ -2,10 +2,14 @@ package photos22;
 
 import java.io.Serializable;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
+    public ObservableList<Album> albums = FXCollections.observableArrayList();
 
-    public String username;
+    private String username;
 
     public User(String username) {
         this.username = username;

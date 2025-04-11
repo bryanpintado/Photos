@@ -1,8 +1,22 @@
 package photos22.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import photos22.Album;
+import photos22.User;
 
 public class UserController {
+    private User user;
+    @FXML
+    private ListView<Album> albumListView;
+
+    @FXML
+    private Label welcomeLabel;
+
+    @FXML
+    public void initialize() {
+    }
 
     @FXML
     private void handleCreateAlbum() {
@@ -26,5 +40,11 @@ public class UserController {
     private void handleLogout() {
         // TODO: implement logic
         System.out.println("Logout clicked");
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        albumListView.setItems(user.albums);
+        welcomeLabel.setText("Welcome, " + user.getUsername());
     }
 }

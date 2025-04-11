@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import photos22.UserManager; // Import the User class
+import photos22.UserManager; 
 import photos22.User;
 import photos22.AlertUtil;
 import photos22.SceneUtil;
