@@ -3,8 +3,8 @@ package photos22.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import photos22.Album;
-import photos22.User;
+import photos22.model.Album;
+import photos22.model.User;
 
 public class UserController {
     private User user;

@@ -8,10 +8,10 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-import photos22.UserManager; 
-import photos22.User;
-import photos22.AlertUtil;
-import photos22.SceneUtil;
+import photos22.model.User;
+import photos22.model.UserManager;
+import photos22.util.AlertUtil;
+import photos22.util.SceneUtil;
 
 public class AdminController {
 

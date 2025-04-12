@@ -1,4 +1,4 @@
-package photos22;
+package photos22.model;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import photos22.util.AlertUtil;
 
 public class UserManager {
     private static final String storeDir = "data";

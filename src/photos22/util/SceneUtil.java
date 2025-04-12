@@ -1,4 +1,4 @@
-package photos22;
+package photos22.util;
 
 import java.io.IOException;
 
