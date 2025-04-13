@@ -56,8 +56,12 @@ public class Photo implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Photo)) return false;
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Photo)) {
+            return false;
+        }
         Photo other = (Photo) o;
         return file.getAbsolutePath().equalsIgnoreCase(other.file.getAbsolutePath());
     }
@@ -70,5 +74,21 @@ public class Photo implements Serializable {
     @Override
     public String toString() {
         return caption.isEmpty() ? file.getName() : caption;
+    }
+
+    public boolean addTag(Tag tag) {
+        if (!tags.contains(tag)) {
+            tags.add(tag);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeTag(Tag tag) {
+        return tags.remove(tag);
+    }
+
+    public boolean hasTag(Tag tag) {
+        return tags.contains(tag);
     }
 }
