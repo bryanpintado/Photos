@@ -1,5 +1,6 @@
 package photos22.controller;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -44,7 +45,7 @@ public class UserController {
 
     public void setUser(User user) {
         this.user = user;
-        albumListView.setItems(user.albums);
+        albumListView.setItems(FXCollections.observableArrayList(user.getAlbums()));
         welcomeLabel.setText("Welcome, " + user.getUsername());
     }
 }

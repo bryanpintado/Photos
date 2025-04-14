@@ -16,10 +16,9 @@ public class UserManager {
     private static final String storeFile = "users.dat";
 
     private static UserManager instance;
-    public ObservableList<User> users;
+    private final ObservableList<User> users = FXCollections.observableArrayList();
 
     private UserManager() {
-        users = FXCollections.observableArrayList();
     }
 
     public static UserManager getInstance() {
@@ -27,6 +26,10 @@ public class UserManager {
             instance = new UserManager();
         }
         return instance;
+    }
+
+    public ObservableList<User> getUsers() {
+        return users;
     }
 
     public void deleteUser(String username) {
@@ -53,6 +56,10 @@ public class UserManager {
 
     public void saveUsers() {
         try {
+            File dir = new File(storeDir);
+            if (!dir.exists()) {
+                dir.mkdir();
+            }
             ObjectOutputStream oos = new ObjectOutputStream(
                     new FileOutputStream(storeDir + File.separator + storeFile));
             oos.writeObject(new ArrayList<>(users));

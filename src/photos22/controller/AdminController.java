@@ -20,7 +20,7 @@ public class AdminController {
     @FXML
     private void initialize() {
         manager.loadUsers();
-        userListView.setItems(manager.users);
+        userListView.setItems(manager.getUsers());
     }
 
     @FXML
