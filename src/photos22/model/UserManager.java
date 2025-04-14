@@ -75,5 +75,13 @@ public class UserManager {
         }
         return null;
     }
+    public  boolean addUser(User user){
+        if(isUserInList(user.getUsername())){
+            AlertUtil.showAlert("Error: Username already exists!!");
+            return false;
+        }
+        users.add(user);
+        return true;
+    }
 
 }

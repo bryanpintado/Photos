@@ -45,7 +45,7 @@ public class AdminController {
             return;
         }
         User newUser = new User(username.trim());
-        manager.users.add(newUser);
+        manager.addUser(newUser);
 
         try {
             manager.saveUsers();
