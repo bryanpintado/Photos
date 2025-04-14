@@ -75,4 +75,9 @@ public class Album implements Serializable {
     public int getPhotoCount() {
         return photos.size();
     }
+
+    @Override
+    public String toString() {
+        return name + " (" + getPhotoCount() + " photos)";
+    }
 }

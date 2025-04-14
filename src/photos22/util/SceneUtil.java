@@ -26,7 +26,7 @@ public class SceneUtil {
             stage.setScene(new Scene(root));
             stage.setTitle(title);
             stage.show();
-            return loader.getController(); 
+            return loader.getController();
         } catch (IOException e) {
             AlertUtil.showAlert("Failed to load: " + fxmlFile + "\n" + e.getMessage());
             e.printStackTrace();

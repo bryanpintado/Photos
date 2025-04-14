@@ -55,6 +55,8 @@ public class AdminController {
 
     @FXML
     private void handleLogout(ActionEvent event) {
-        SceneUtil.switchScene((Stage) userListView.getScene().getWindow(), "login.fxml", "Login Page");
+        UserManager.getInstance().saveUsers();
+        Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+        SceneUtil.switchScene(stage, "login.fxml", "Login");
     }
 }

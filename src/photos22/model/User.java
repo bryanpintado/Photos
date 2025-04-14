@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     private List<Album> albums = new ArrayList<>();
@@ -14,7 +11,7 @@ public class User implements Serializable {
     private String username;
 
     public User(String username) {
-        this.username = username;
+        this.username = username.toLowerCase();
     }
 
     @Override
@@ -25,6 +22,7 @@ public class User implements Serializable {
     public String getUsername() {
         return username;
     }
+
     public List<Album> getAlbums() {
         return albums;
     }

@@ -10,13 +10,17 @@ import photos22.util.AlertUtil;
 import photos22.util.SceneUtil;
 
 public class LoginController {
+    @FXML
+    private void initialize() {
+        UserManager.getInstance().loadUsers();
+    }
 
     @FXML
     private TextField usernameField;
 
     @FXML
     public void handleLogin(ActionEvent event) {
-        String username = usernameField.getText().trim();
+        String username = usernameField.getText().trim().toLowerCase();
         if (username.isEmpty()) {
             AlertUtil.showAlert("Error: empty username");
 
