@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import photos22.util.AlertUtil;
@@ -52,19 +51,27 @@ public class UserManager {
         return false;
     }
 
-    public void saveUsers() throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(
-                new FileOutputStream(storeDir + File.separator + storeFile));
-        oos.writeObject(new ArrayList<>(users));
-        oos.close();
+    public void saveUsers() {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(
+                    new FileOutputStream(storeDir + File.separator + storeFile));
+            oos.writeObject(new ArrayList<>(users));
+            oos.close();
+        } catch (IOException e) {
+            AlertUtil.showAlert("Error saving users: " + e.toString());
+        }
     }
 
     @SuppressWarnings("unchecked")
-    public void loadUsers() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
-        ArrayList<User> loadedUsers = (ArrayList<User>) ois.readObject();
-        users.setAll(loadedUsers);
-        ois.close();
+    public void loadUsers() {
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(storeDir + File.separator + storeFile));
+            ArrayList<User> loadedUsers = (ArrayList<User>) ois.readObject();
+            users.setAll(loadedUsers);
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            AlertUtil.showAlert("Error: " + e.toString());
+        }
     }
 
     public User getUserByUsername(String username) {
@@ -75,8 +82,9 @@ public class UserManager {
         }
         return null;
     }
-    public  boolean addUser(User user){
-        if(isUserInList(user.getUsername())){
+
+    public boolean addUser(User user) {
+        if (isUserInList(user.getUsername())) {
             AlertUtil.showAlert("Error: Username already exists!!");
             return false;
         }

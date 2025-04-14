@@ -3,9 +3,6 @@ package photos22.controller;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
-
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 import photos22.model.User;
@@ -22,12 +19,7 @@ public class AdminController {
 
     @FXML
     private void initialize() {
-        try {
-            manager.loadUsers();
-
-        } catch (Exception e) {
-            AlertUtil.showAlert("Error: " + e.toString());
-        }
+        manager.loadUsers();
         userListView.setItems(manager.users);
     }
 
@@ -47,11 +39,7 @@ public class AdminController {
         User newUser = new User(username.trim());
         manager.addUser(newUser);
 
-        try {
-            manager.saveUsers();
-        } catch (IOException e) {
-            AlertUtil.showAlert("Error saving users: " + e.toString());
-        }
+        manager.saveUsers();
     }
 
     @FXML
@@ -62,11 +50,7 @@ public class AdminController {
             return;
         }
         manager.deleteUser(selectedUser.getUsername());
-        try {
-            manager.saveUsers();
-        } catch (IOException e) {
-            AlertUtil.showAlert("Error saving users: " + e.toString());
-        }
+        manager.saveUsers();
     }
 
     @FXML
