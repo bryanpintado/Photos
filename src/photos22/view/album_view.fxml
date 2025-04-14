@@ -1,0 +1,13 @@
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="photos22.controller.AlbumController" spacing="10" alignment="CENTER">
+    
+    <Label fx:id="albumNameLabel" text="Album Name" />
+    <ListView fx:id="photoListView" prefHeight="300" prefWidth="400" />
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Add Photo" onAction="#handleAddPhoto"/>
+        <Button text="Remove Photo" onAction="#handleRemovePhoto"/>
+        <Button text="View Photo" onAction="#handleViewPhoto"/>
+        <Button text="Back" onAction="#handleBack"/>
+    </HBox>
+</VBox>

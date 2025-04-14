@@ -1,10 +1,13 @@
 package photos22.controller;
 
+import java.io.IOException;
 import java.util.Optional;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
@@ -60,14 +63,41 @@ public class UserController {
 
     @FXML
     private void handleDeleteAlbum() {
-        // TODO: implement logic
-        System.out.println("Delete Album clicked");
+        Album selected = albumListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select an album to delete.");
+            return;
+        }
+
+        user.getAlbums().remove(selected);
+        UserManager.getInstance().saveUsers();
+        albumListView.setItems(FXCollections.observableArrayList(user.getAlbums()));
+        System.out.println("Deleted album: " + selected.getName());
     }
 
     @FXML
     private void handleOpenAlbum() {
-        // TODO: implement logic
-        System.out.println("Open Album clicked");
+        Album selected = albumListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select an album to open.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos22/view/album_view.fxml"));
+            Parent root = loader.load();
+
+            AlbumController controller = loader.getController();
+            controller.setAlbum(selected);
+
+            Stage stage = (Stage) albumListView.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setTitle("Album: " + selected.getName());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            AlertUtil.showAlert("Failed to load album view.\n" + e.toString());
+        }
     }
 
     @FXML
