@@ -91,4 +91,19 @@ public class Photo implements Serializable {
     public boolean hasTag(Tag tag) {
         return tags.contains(tag);
     }
+
+    public String getDateString() {
+        return dateTime.toString();
+    }
+
+    public String getTagsString() {
+        if (tags == null || tags.isEmpty()) {
+            return "(No tags)";
+        }
+        List<String> tagStrings = new ArrayList<>();
+        for (Tag tag : tags) {
+            tagStrings.add(tag.getName() + "=" + tag.getValue());
+        }
+        return String.join(", ", tagStrings);
+    }
 }

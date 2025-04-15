@@ -1,12 +1,17 @@
 package photos22.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import photos22.model.Album;
 import photos22.model.Photo;
 import photos22.model.UserManager;
@@ -55,12 +60,39 @@ public class AlbumController {
 
     @FXML
     private void handleRemovePhoto() {
-        // TODO: Implement remove selected photo
+        Photo selected = photoListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select a photo to remove.");
+            return;
+        }
+
+        album.getPhotos().remove(selected);
+        UserManager.getInstance().saveUsers();
+        photoListView.setItems(FXCollections.observableArrayList(album.getPhotos()));
     }
 
     @FXML
     private void handleViewPhoto() {
-        // TODO: Implement view selected photo in detail
+        Photo selected = photoListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select a photo to view.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos22/view/photo_view.fxml"));
+            Parent root = loader.load();
+
+            PhotoController controller = loader.getController();
+            controller.setPhoto(selected);
+
+            Stage stage = new Stage();
+            stage.setTitle("Photo Viewer");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            AlertUtil.showAlert("Failed to load photo view.\n" + e.toString());
+        }
     }
 
     @FXML

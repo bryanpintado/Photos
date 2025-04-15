@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="photos22.controller.PhotoController" spacing="10" alignment="CENTER">
+    
+    <ImageView fx:id="photoImageView" fitWidth="400" preserveRatio="true" />
+    <Label fx:id="captionLabel" />
+    <Label fx:id="dateLabel" />
+    <Label fx:id="tagsLabel" wrapText="true" />
+</VBox>
