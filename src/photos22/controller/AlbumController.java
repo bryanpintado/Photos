@@ -32,6 +32,18 @@ public class AlbumController {
         this.album = album;
         albumNameLabel.setText(album.getName());
         photoListView.setItems(FXCollections.observableArrayList(album.getPhotos()));
+    
+        photoListView.setCellFactory(list -> new javafx.scene.control.ListCell<Photo>() {
+            @Override
+            protected void updateItem(Photo photo, boolean empty) {
+                super.updateItem(photo, empty);
+                if (empty || photo == null) {
+                    setText(null);
+                } else {
+                    setText(photo.getFile().getName());
+                }
+            }
+        });
     }
 
     @FXML
@@ -179,4 +191,27 @@ public class AlbumController {
         UserManager.getInstance().saveUsers();
         AlertUtil.showAlert("Tag removed successfully.");
     }
+
+    @FXML
+    private void handleSetCaption() {
+        Photo selected = photoListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select a photo to caption.");
+            return;
+        }
+
+        TextInputDialog dialog = new TextInputDialog(selected.getCaption());
+        dialog.setTitle("Set Caption");
+        dialog.setHeaderText("Enter new caption for the photo:");
+        dialog.setContentText("Caption:");
+
+        String caption = dialog.showAndWait().orElse(null);
+        if (caption == null || caption.trim().isEmpty())
+            return;
+
+        selected.setCaption(caption.trim());
+        UserManager.getInstance().saveUsers();
+        AlertUtil.showAlert("Caption updated.");
+    }
+
 }

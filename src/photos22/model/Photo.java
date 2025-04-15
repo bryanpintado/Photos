@@ -73,7 +73,7 @@ public class Photo implements Serializable {
 
     @Override
     public String toString() {
-        return caption.isEmpty() ? file.getName() : caption;
+        return file.getName(); // always shows the filename, not the caption
     }
 
     public boolean addTag(Tag tag) {
