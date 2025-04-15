@@ -10,12 +10,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import photos22.model.Album;
 import photos22.model.Photo;
 import photos22.model.UserManager;
 import photos22.util.AlertUtil;
+import photos22.model.Tag;
 
 public class AlbumController {
     private Album album;
@@ -97,6 +99,84 @@ public class AlbumController {
 
     @FXML
     private void handleBack() {
-        // TODO: Implement return to user album list
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos22/view/user_view.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) photoListView.getScene().getWindow();
+            stage.setTitle("User Albums");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            AlertUtil.showAlert("Failed to return to album list.\n" + e.toString());
+        }
+    }
+
+    @FXML
+    private void handleAddTag() {
+        Photo selected = photoListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select a photo to tag.");
+            return;
+        }
+
+        TextInputDialog typeDialog = new TextInputDialog();
+        typeDialog.setTitle("Add Tag");
+        typeDialog.setHeaderText("Enter Tag Type (e.g., person, location)");
+        typeDialog.setContentText("Type:");
+        String type = typeDialog.showAndWait().orElse(null);
+        if (type == null || type.trim().isEmpty())
+            return;
+
+        TextInputDialog valueDialog = new TextInputDialog();
+        valueDialog.setTitle("Add Tag");
+        valueDialog.setHeaderText("Enter Tag Value");
+        valueDialog.setContentText("Value:");
+        String value = valueDialog.showAndWait().orElse(null);
+        if (value == null || value.trim().isEmpty())
+            return;
+
+        Tag newTag = new Tag(type.trim(), value.trim());
+        if (!selected.addTag(newTag)) {
+            AlertUtil.showAlert("Tag already exists for this photo.");
+            return;
+        }
+
+        UserManager.getInstance().saveUsers();
+        // AlertUtil.showAlert("Tag added successfully.");
+    }
+
+    @FXML
+    private void handleRemoveTag() {
+        Photo selected = photoListView.getSelectionModel().getSelectedItem();
+        if (selected == null) {
+            AlertUtil.showAlert("Please select a photo to remove a tag from.");
+            return;
+        }
+
+        TextInputDialog typeDialog = new TextInputDialog();
+        typeDialog.setTitle("Remove Tag");
+        typeDialog.setHeaderText("Enter Tag Type to Remove");
+        typeDialog.setContentText("Type:");
+        String type = typeDialog.showAndWait().orElse(null);
+        if (type == null || type.trim().isEmpty())
+            return;
+
+        TextInputDialog valueDialog = new TextInputDialog();
+        valueDialog.setTitle("Remove Tag");
+        valueDialog.setHeaderText("Enter Tag Value to Remove");
+        valueDialog.setContentText("Value:");
+        String value = valueDialog.showAndWait().orElse(null);
+        if (value == null || value.trim().isEmpty())
+            return;
+
+        Tag tagToRemove = new Tag(type.trim(), value.trim());
+        if (!selected.removeTag(tagToRemove)) {
+            AlertUtil.showAlert("This tag was not found on the selected photo.");
+            return;
+        }
+
+        UserManager.getInstance().saveUsers();
+        AlertUtil.showAlert("Tag removed successfully.");
     }
 }

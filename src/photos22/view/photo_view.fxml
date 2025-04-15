@@ -12,4 +12,5 @@
     <Label fx:id="captionLabel" />
     <Label fx:id="dateLabel" />
     <Label fx:id="tagsLabel" wrapText="true" />
+    
 </VBox>
