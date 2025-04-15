@@ -106,4 +106,7 @@ public class Photo implements Serializable {
         }
         return String.join(", ", tagStrings);
     }
+    public LocalDateTime getModifiedDate() {
+        return this.dateTime;
+    }
 }

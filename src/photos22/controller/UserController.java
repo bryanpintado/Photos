@@ -58,7 +58,6 @@ public class UserController {
         UserManager.getInstance().saveUsers();
 
         albumListView.setItems(FXCollections.observableArrayList(user.getAlbums()));
-        System.out.println("Create Album clicked");
     }
 
     @FXML
@@ -72,7 +71,6 @@ public class UserController {
         user.getAlbums().remove(selected);
         UserManager.getInstance().saveUsers();
         albumListView.setItems(FXCollections.observableArrayList(user.getAlbums()));
-        System.out.println("Deleted album: " + selected.getName());
     }
 
     @FXML
@@ -112,4 +110,21 @@ public class UserController {
         albumListView.setItems(FXCollections.observableArrayList(user.getAlbums()));
         welcomeLabel.setText("Welcome, " + user.getUsername());
     }
+    @FXML
+private void handleSearchPhotos() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/photos22/view/search_view.fxml"));
+        Parent root = loader.load();
+
+        SearchController controller = loader.getController();
+        controller.setUser(user);
+
+        Stage stage = (Stage) albumListView.getScene().getWindow();
+        stage.setTitle("Search Photos");
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        AlertUtil.showAlert("Failed to open search screen.\n" + e.getMessage());
+    }
+}
 }

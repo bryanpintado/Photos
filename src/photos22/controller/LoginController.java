@@ -45,9 +45,5 @@ public class LoginController {
                 controller.setUser(user);
             }
         }
-
-        // Test print
-        System.out.println("Logged in as: " + username);
-
     }
 }

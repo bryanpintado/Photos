@@ -26,4 +26,11 @@ public class User implements Serializable {
     public List<Album> getAlbums() {
         return albums;
     }
+
+    public void addAlbum(Album album) {
+        if (albums == null) {
+            albums = new ArrayList<>();
+        }
+        albums.add(album);
+    }
 }

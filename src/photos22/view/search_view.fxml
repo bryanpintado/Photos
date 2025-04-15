@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="photos22.controller.SearchController"
+      spacing="10" alignment="CENTER" padding="20">
+
+    <Label text="Search Photos by Tag(s) or Date Range" style="-fx-font-size: 16px;"/>
+
+    <!-- Date range search -->
+    <HBox spacing="10">
+        <TextField fx:id="startDateField" promptText="Start date: yyyy-MM-dd"/>
+        <TextField fx:id="endDateField" promptText="End date: yyyy-MM-dd"/>
+        <Button text="Search by Date" onAction="#handleSearchByDate"/>
+    </HBox>
+
+    <!-- Tag search -->
+    <HBox spacing="10">
+        <TextField fx:id="tagField1" promptText="e.g. person=alice"/>
+        <TextField fx:id="tagField2" promptText="e.g. location=paris"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <RadioButton fx:id="singleRadio" text="Single Tag" toggleGroup="$toggleGroup" selected="true"/>
+        <RadioButton fx:id="andRadio" text="AND" toggleGroup="$toggleGroup"/>
+        <RadioButton fx:id="orRadio" text="OR" toggleGroup="$toggleGroup"/>
+        <Button text="Search" onAction="#handleSearch"/>
+    </HBox>
+
+    <!-- Results -->
+    <ListView fx:id="resultListView" prefHeight="200" prefWidth="400"/>
+
+    <!-- Actions -->
+    <HBox spacing="10">
+        <Button text="Create Album from Results" onAction="#handleCreateAlbum"/>
+        <Button text="Back" onAction="#handleBack"/>
+    </HBox>
+
+</VBox>
